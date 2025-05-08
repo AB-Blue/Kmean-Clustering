@@ -5,37 +5,32 @@ from onecode import file_input, dropdown, text_input, file_output, Logger
 
 
 def run():
-    # 1) CSV upload
-    csv_path = file_input(
-        key="csv_file",
-        label="Upload CSV File",
-        value=""
-    )
-    if not os.path.exists(csv_path):
-        Logger.error(f"CSV not found: {csv_path}")
-        return
+    # 1) CSV picker
+    csv_path = file_input(key="csv_file", label="Upload CSV File", value="")
 
-    # 2) Read header + DataFrame
-    # try:
-    #     df = pd.read_csv(csv_path)
-    #     cols = list(df.columns)
-    # except:
-    #     cols = ["feat1", "feat2"]
+    # 2) Build cols list up-front
+    if csv_path and os.path.exists(csv_path):
+        try:
+            df = pd.read_csv(csv_path)
+            cols = list(df.columns)
+        except Exception as e:
+            Logger.error(f"Failed to read CSV: {e}")
+            cols = []
+    else:
+        cols = []
 
-    # 3) Feature selectors
+    # 3) Now safe to build dropdowns
     feat1 = dropdown(
         key="feat1",
         label="Feature 1 (X axis)",
-        # options=cols,
-        # value=cols[0]
-        value=""
+        options=cols,
+        value=cols[0] if cols else ""
     )
     feat2 = dropdown(
         key="feat2",
         label="Feature 2 (Y axis)",
-        # options=cols,
-        # value=cols[1] if len(cols) > 1 else cols[0]
-        value=""
+        options=cols,
+        value=cols[1] if len(cols) > 1 else (cols[0] if cols else "")
     )
 
     # 4) K and iterations
