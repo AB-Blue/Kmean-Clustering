@@ -13,7 +13,7 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
     np.random.seed(42)
 
     # Read csv data
-    data = pd.read_csv(data, index_col=0)
+    data = pd.read_csv(csv_path, index_col=0)
     
     # Fill missing values
     for col in data.columns:
