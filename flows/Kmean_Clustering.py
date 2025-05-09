@@ -104,7 +104,7 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
         yaxis=fig.layout.yaxis
     ))
 
-    last_frame_fig.write_image(png_output, format='png')
+    last_frame_fig.write_image(png_output, format='png', width=1200, height=800)
     print(f"Saved last iteration as PNG to {png_output}")
 
     fig.write_html(
@@ -124,9 +124,5 @@ if __name__ == '__main__':
     feat2 = 'weight' #'repht'
     k = 3
     n_iters = 10
-
-    csv_output = 'E:\AB\Visualization\DeepLime\Kmean_clustering_May_2025_AB\csv_output.csv'
-    html_output = 'E:\AB\Visualization\DeepLime\Kmean_clustering_May_2025_AB\html_output.html'
-    png_output = 'E:\AB\Visualization\DeepLime\Kmean_clustering_May_2025_AB\png_output.png'
 
     kmean_clustering(data, feat1, feat2, k, n_iters, csv_output, html_output, png_output)
