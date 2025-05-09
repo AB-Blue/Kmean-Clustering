@@ -47,7 +47,7 @@ def run():
     out_html = file_output(
         key="out_html",
         label="7) Save Plotly HTML",
-        value="kmeans_plot.html"
+        value="kmeans_animation.html"
     )
     out_png = file_output(
         key="out_png",
