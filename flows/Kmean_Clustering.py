@@ -12,9 +12,9 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
     # Make the results reproducible
     np.random.seed(42)
 
-    # Read csv data
-    data = pd.read_csv(csv_path, index_col=0)
-    
+    # Read the CSV
+    data = pd.read_csv(csv_path)
+
     # Fill missing values
     for col in data.columns:
         if data[col].dtype == np.float64:
@@ -23,9 +23,22 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
             mode = data[col].mode()
             data[col] = data[col].fillna(mode[0] if not mode.empty else np.nan)
 
-    # data = data[data['height']>100]
-    X = data[[feat1, feat2]].values
-        
+    # Keep originals
+    orig1 = data[feat1].copy()
+    orig2 = data[feat2].copy()
+
+    # Prepare numeric matrix for clustering
+    X = data[[feat1, feat2]].copy()
+
+    encoders = {}
+    for col in [feat1, feat2]:
+        if X[col].dtype == 'object' or X[col].dtype.name == 'category':
+            le = LabelEncoder()
+            X[col] = le.fit_transform(X[col])
+            encoders[col] = le
+
+    X = X.values.astype(float)
+            
     # Define K-Means functions (initialize, assign, update)
     def initialize_centroids(X, k):
         mins = X.min(axis=0)
@@ -61,6 +74,9 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
 
     # Save labels to CSV on last iteration
     data['cluster_label'] = history[-1][1]
+    data[feat1] = orig1
+    data[feat2] = orig2
+    X = data[[feat1, feat2]]
     data.to_csv(csv_output, index=True)
     print("Saved updated CSV to dataset_with_clusters.csv")
 
@@ -72,8 +88,18 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
             marker=dict(color=labels_i, showscale=False),
             name='Data'
         )
+
+        # Inverse-transform any encoded centroid dims
+        cent_plot = cents_i.copy()
+        # If feat1 was encoded:
+        if feat1 in encoders:
+            cent_plot[:, 0] = encoders[feat1].inverse_transform(cent_plot[:, 0].astype(int))
+        # If feat2 was encoded:
+        if feat2 in encoders:
+            cent_plot[:, 1] = encoders[feat2].inverse_transform(cent_plot[:, 1].astype(int))
+
         cent_scatter = go.Scatter(
-            x=cents_i[:, 0], y=cents_i[:, 1], mode='markers',
+            x=cent_plot[:, 0], y=cent_plot[:, 1], mode='markers',
             marker=dict(symbol='x', size=12, color='black'),
             name='Centroids'
         )
