@@ -108,11 +108,16 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
     print(f"Saved last iteration as PNG to {png_output}")
 
     fig.write_html(
-    html_output,
-    include_plotlyjs=True,   
-    auto_play=True            
+        html_output,
+        include_plotlyjs=True,   
+        full_html=True,          
+        auto_play=True,
+        animation_opts={
+            'frame': 1000,       
+            'transition': 0
+        }
     )
-    print(f"Saved animated K-mean as HTML file to {html_output}")
+    print(f"Saved animated K-mean as offline HTML to {html_output}")
 
 
 if __name__ == '__main__': 
