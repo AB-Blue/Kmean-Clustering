@@ -109,7 +109,7 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
 
     fig.write_html(
     html_output,
-    include_plotlyjs='cdn',    # or True for full self-contained file
+    include_plotlyjs=True,   
     auto_play=True            
     )
     print(f"Saved animated K-mean as HTML file to {html_output}")
