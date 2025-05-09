@@ -74,7 +74,7 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
     data['cluster_label'] = history[-1][1]
     data[feat1] = orig1
     data[feat2] = orig2
-    X = data[[feat1, feat2]]
+    X = data[[feat1, feat2]].values
     data.to_csv(csv_output, index=True)
     print("Saved updated CSV to dataset_with_clusters.csv")
 
@@ -90,16 +90,16 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
         )
 
         # Inverse-transform any encoded centroid dims
-        arr = np.asarray(cents_i, dtype=float)
-        arr = np.atleast_2d(arr).reshape(-1, 2)
+        arr = np.asarray(cents_i, dtype=float).reshape(-1, 2)
         cent_plot = arr.copy()
-        # If feat1 was encoded:
         if feat1 in encoders:
-            cent_plot[:, 0] = encoders[feat1].inverse_transform(cent_plot[:, 0].round().astype(int))
-        # If feat2 was encoded:
+            cent_plot[:, 0] = encoders[feat1].inverse_transform(
+                cent_plot[:, 0].round().astype(int)
+            )
         if feat2 in encoders:
-            cent_plot[:, 1] = encoders[feat2].inverse_transform(cent_plot[:, 1].round().astype(int))
-
+            cent_plot[:, 1] = encoders[feat2].inverse_transform(
+                cent_plot[:, 1].round().astype(int)
+            )
         cent_scatter = go.Scatter(
             x=cent_plot[:, 0], y=cent_plot[:, 1], mode='markers',
             marker=dict(symbol='x', size=12, color='black'),
