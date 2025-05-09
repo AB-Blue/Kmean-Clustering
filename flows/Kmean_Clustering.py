@@ -1,11 +1,9 @@
-# import os
+
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
-# import imageio
+from sklearn.preprocessing import LabelEncoder
 import kaleido
-# import narwhals
-# import imageio_ffmpeg as ffm
 
 
 def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output, png_output):
