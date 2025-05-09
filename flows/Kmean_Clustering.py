@@ -8,7 +8,7 @@ import kaleido
 # import imageio_ffmpeg as ffm
 
 
-def kmean_clustering(data, feat1, feat2, k, n_iters, csv_output, html_output, png_output):
+def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output, png_output):
     # Make the results reproducible
     np.random.seed(42)
 
