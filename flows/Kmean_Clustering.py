@@ -12,6 +12,9 @@ def kmean_clustering(data, feat1, feat2, k, n_iters, csv_output, html_output, pn
     # Make the results reproducible
     np.random.seed(42)
 
+    # Read csv data
+    data = pd.read_csv(data, index_col=0)
+    
     # Fill missing values
     for col in data.columns:
         if data[col].dtype == np.float64:
