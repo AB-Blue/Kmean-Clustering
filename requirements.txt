@@ -1,6 +1,6 @@
 onecode>=1,<2
 numpy
 pandas
-sklearn
+scikit-learn
 plotly
 kaleido
