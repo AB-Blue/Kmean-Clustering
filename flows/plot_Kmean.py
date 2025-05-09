@@ -7,7 +7,8 @@ def run():
     # Step 1: CSV upload
     csv_path = file_input(
         key="csv_file",
-        label="1) Upload CSV File"
+        label="1) Upload CSV File",
+        value=""
     )
     if not csv_path or not os.path.exists(csv_path):
         Logger.info("Please upload a valid CSV to continue.")
