@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 # import imageio
-# import kaleido
+import kaleido
 # import narwhals
 # import imageio_ffmpeg as ffm
 
