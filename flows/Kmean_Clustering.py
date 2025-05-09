@@ -81,6 +81,7 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
     # Prepare Plotly frames with iteration number in title
     frames = []
     for iter_num, labels_i, cents_i in history:
+        
         scatter = go.Scatter(
             x=X[:, 0], y=X[:, 1], mode='markers',
             marker=dict(color=labels_i, showscale=False),
@@ -88,6 +89,7 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
         )
 
         # Inverse-transform any encoded centroid dims
+        cents_i = np.atleast_2d(cents_i)  
         cent_plot = cents_i.copy()
         # If feat1 was encoded:
         if feat1 in encoders:
