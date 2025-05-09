@@ -21,10 +21,7 @@ def kmean_clustering(data, feat1, feat2, k, n_iters, csv_output, html_output, pn
             data[col] = data[col].fillna(mode[0] if not mode.empty else np.nan)
 
     # data = data[data['height']>100]
-    try:
-        X = data[[feat1, feat2]].values
-    except Exception as e:
-        print(e, data.columns, feat1, feat2)
+    X = data[[feat1, feat2]].values
         
     # Define K-Means functions (initialize, assign, update)
     def initialize_centroids(X, k):
