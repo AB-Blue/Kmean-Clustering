@@ -3,6 +3,12 @@ import pandas as pd
 from .Kmean_Clustering import kmean_clustering
 from onecode import file_input, dropdown, text_input, file_output, Logger
 
+import pandas as pd
+import numpy as np
+import plotly.graph_objects as go
+from sklearn.preprocessing import LabelEncoder
+import kaleido
+
 def run():
     # Step 1: CSV upload
     csv_path = file_input(
