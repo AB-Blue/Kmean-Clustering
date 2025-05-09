@@ -3,66 +3,58 @@ import pandas as pd
 from .Kmean_Clustering import kmean_clustering
 from onecode import file_input, dropdown, text_input, file_output, Logger
 
-
 def run():
-    # 1) CSV picker
-    csv_path = file_input(key="csv_file", label="Upload CSV File", value="")
+    # Step 1: CSV upload
+    csv_path = file_input(
+        key="csv_file",
+        label="1) Upload CSV File"
+    )
+    if not csv_path or not os.path.exists(csv_path):
+        Logger.info("Please upload a valid CSV to continue.")
+        return
 
-    # 2) Build cols list up-front
-    if csv_path and os.path.exists(csv_path):
-        try:
-            df = pd.read_csv(csv_path)
-            cols = list(df.columns)
-        except Exception as e:
-            Logger.error(f"Failed to read CSV: {e}")
-            cols = []
-    else:
-        cols = []
-
-    # 3) Now safe to build dropdowns
-    feat1 = dropdown(
+    # Step 2: Feature selectors as LineEdit
+    feat1 = text_input(
         key="feat1",
-        label="Feature 1 (X axis)",
-        options=cols,
-        value=cols[0] if cols else ""
+        label="2) Feature 1 (X axis)",
+        value=""
     )
-    feat2 = dropdown(
+    feat2 = text_input(
         key="feat2",
-        label="Feature 2 (Y axis)",
-        options=cols,
-        value=cols[1] if len(cols) > 1 else (cols[0] if cols else "")
+        label="3) Feature 2 (Y axis)",
+        value=""
     )
 
-    # 4) K and iterations
+    # Step 3: Other parameters
     k_str = text_input(
         key="n_clusters",
-        label="Number of Clusters (k)",
+        label="4) Number of Clusters (k)",
         value="3"
     )
     it_str = text_input(
         key="n_iters",
-        label="Number of Iterations",
+        label="5) Number of Iterations",
         value="10"
     )
 
-    # 5) Outputs
+    # Step 4: Outputs
     out_csv = file_output(
         key="out_csv",
-        label="Clustered CSV",
+        label="6) Save Clustered CSV",
         value="clustered_output.csv"
     )
     out_html = file_output(
         key="out_html",
-        label="Plotly HTML",
+        label="7) Save Plotly HTML",
         value="kmeans_plot.html"
     )
     out_png = file_output(
         key="out_png",
-        label="Clustered PNG",
+        label="8) Save Snapshot PNG",
         value="clustered_image.png"
     )
 
-    # 6) Parse & validate numeric inputs
+    # Step 5: Run clustering when all inputs are set
     try:
         k = int(k_str)
         n_iters = int(it_str)
@@ -70,10 +62,15 @@ def run():
         Logger.error("k and iterations must be integers")
         return
 
-    # Logger.info(f"Saved Plotly HTML to {out_html}")
-
     try:
-        kmean_clustering(csv_path, feat1, feat2, k, n_iters, out_csv, out_html, out_png)
-    except ValueError:
-        Logger.error("Please check parameters")
+        # Call your K-means function here:
+        kmean_clustering(
+            csv_path, feat1, feat2,
+            k, n_iters,
+            out_csv, out_html, out_png
+        )
+        Logger.info("Clustering complete!")
+    except Exception as e:
+        Logger.error(f"Clustering failed: {e}")
         return
+
