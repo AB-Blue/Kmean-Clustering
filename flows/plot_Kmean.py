@@ -66,12 +66,13 @@ def run():
     try:
         # Call your K-means function here:
         kmean_clustering(
-            csv_path, feat1, feat2,
+            csv_path, str(feat1), str(feat2),
             k, n_iters,
             out_csv, out_html, out_png
         )
         Logger.info("Clustering complete!")
     except Exception as e:
-        Logger.error(f"Clustering failed: {e}")
+        Logger.error(f"Clustering failed: {e}, {list(pd.read_csv(csv_path).columns)}, {str(feat1)}, {str(feat2)})
+")
         return
 
