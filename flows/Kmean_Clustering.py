@@ -21,6 +21,11 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
             mode = data[col].mode()
             data[col] = data[col].fillna(mode[0] if not mode.empty else np.nan)
 
+    cat_cols = [
+    c for c in (feat1, feat2)
+    if data[c].dtype == 'object' or data[c].dtype.name == 'category'
+    ]
+    
     # Keep originals
     orig1 = data[feat1].copy()
     orig2 = data[feat2].copy()
@@ -51,15 +56,41 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
         return np.array(labels)
 
     def update_centroids(X, labels, k):
-        centroids = []
+        # centroids = []
+        # for i in range(k):
+        #     points = X[labels == i]
+        #     if len(points) > 0:
+        #         new_center = points.mean(axis=0)
+        #     else:
+        #         new_center = X[np.random.choice(len(X))]
+        #     centroids.append(new_center)
+        # return np.array(centroids)
+
+
+        new_cents = []
         for i in range(k):
-            points = X[labels == i]
-            if len(points) > 0:
-                new_center = points.mean(axis=0)
-            else:
-                new_center = X[np.random.choice(len(X))]
-            centroids.append(new_center)
+            pts = data.loc[labels == i, [feat1, feat2]]
+            # numeric means
+            num_means = pts.select_dtypes(include='number').mean().values
+            # categorical modes
+            cat_modes = [
+                pts[c].mode().iloc[0]
+                if not pts[c].mode().empty else np.nan
+                for c in cat_cols
+            ]
+            # assemble centroid in original order
+            cent = []
+            for col in (feat1, feat2):
+                if col in cat_cols:
+                    cent.append(cat_modes[cat_cols.index(col)])
+                else:
+                    # match numeric column position
+                    num_idx = list(pts.select_dtypes('number').columns).index(col)
+                    cent.append(num_means[num_idx])
+            new_cents.append(cent)
+        centroids = np.array(new_cents, dtype=object)
         return np.array(centroids)
+
 
     # Run K-Means and record history
     centroids = initialize_centroids(X, k)
