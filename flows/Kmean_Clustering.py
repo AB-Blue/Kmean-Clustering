@@ -76,7 +76,7 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
         )
         frames.append(go.Frame(data=[scatter, cent_scatter], name=f'iter{iter_num}'))
 
-    layout = go.Layout(width=1200, height=1200,
+    layout = go.Layout(width=600, height=600,
         title=dict(text=f'K-Means Clustering Animation {feat1} vs {feat2}, k={k}, Iteration 1'),
         xaxis=dict(title=feat1, scaleanchor="y", scaleratio=1),
         yaxis=dict(title=feat2),
@@ -101,7 +101,7 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
         yaxis=fig.layout.yaxis
     ))
 
-    last_frame_fig.write_image(png_output, format='png', width=1200, height=800)
+    last_frame_fig.write_image(png_output, format='png', width=600, height=600)
     print(f"Saved last iteration as PNG to {png_output}")
 
     fig.write_html(
