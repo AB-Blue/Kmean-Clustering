@@ -78,14 +78,16 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
 
     layout = go.Layout(
         title=dict(text=f'K-Means Clustering Animation {feat1} vs {feat2}, k={k}, Iteration 1'),
-        xaxis=dict(title=feat1, scaleanchor="y", scaleratio=1),
+        xaxis=dict(title=feat1),
         yaxis=dict(title=feat2),
+        autosize=True,
         updatemenus=[dict(
             type='buttons', showactive=False,
             buttons=[dict(label='Play', method='animate', args=[None, {'frame': {'duration': 1000, 'redraw': True}, 'fromcurrent': True}])]
         )]
     )
     fig = go.Figure(data=frames[0].data, layout=layout, frames=frames)
+    fig.update_xaxes(scaleanchor="y", scaleratio=1)
 
     # Update title per frame
     for f in fig.frames:
