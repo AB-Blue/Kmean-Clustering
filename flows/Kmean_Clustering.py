@@ -78,7 +78,7 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
 
     layout = go.Layout(
         title=dict(text=f'K-Means Clustering Animation {feat1} vs {feat2}, k={k}, Iteration 1'),
-        xaxis=dict(title=feat1),
+        xaxis=dict(title=feat1, scaleanchor="y", scaleratio=1),
         yaxis=dict(title=feat2),
         updatemenus=[dict(
             type='buttons', showactive=False,
