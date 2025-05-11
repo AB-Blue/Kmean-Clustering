@@ -89,6 +89,17 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
     fig = go.Figure(data=frames[0].data, layout=layout, frames=frames)
     fig.update_xaxes(scaleanchor="y", scaleratio=1)
 
+    y_vals = X[:, 1]
+    ymin, ymax = y_vals.min(), y_vals.max()
+    ypad = 0.05 * (ymax - ymin)   # 5% padding
+    
+    x_vals = X[:, 0]
+    xmin, xmax = x_vals.min(), x_vals.max()
+    xpad = 0.05 * (xmax - xmin)
+    
+    fig.update_xaxes(range=[xmin - xpad, xmax + xpad])
+    fig.update_yaxes(range=[ymin - ypad, ymax + ypad])
+
     # Update title per frame
     for f in fig.frames:
         f.layout = {'title': f'K-Means Clustering Animation {feat1} vs {feat2}, k={k}, Iteration {f.name.replace("iter","")}' }
@@ -110,8 +121,7 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
         html_output,
         include_plotlyjs=True,   
         full_html=True,
-        auto_play=False,
-        config={'responsive': True}
+        auto_play=False
     )
     print(f"Saved animated K-mean as offline HTML to {html_output}")
 
