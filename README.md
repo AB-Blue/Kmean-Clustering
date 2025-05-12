@@ -1,6 +1,6 @@
-# Mapping Application
+# Kmean-Clustering Application
 
-## Map visualization in 2D and 3D view
+## Unsupervised Machine Learning Tool
 ### This application is available on the OneCode platform
 
 Please follow the instructions of provided link to create your Onecode account.
@@ -50,4 +50,14 @@ Author: Amir Abbas Babasafari (AB)
 Date: April 2025
 
 Email: a.babasafari@yahoo.com
+
+
+Describe, feel free, interactively, iteratively, assign, udate
+limitations2, 2 feats, numerical
+csv path
+https://github.com/vincentarelbundock/Rdatasets/tree/master/csv
+skitlearn
+outputs
+register app and compare
+
 
