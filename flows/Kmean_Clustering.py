@@ -1,4 +1,3 @@
-
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
@@ -6,6 +5,7 @@ import kaleido
 
 
 def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output, png_output):
+    
     # Make the results reproducible
     np.random.seed(42)
 
@@ -20,7 +20,6 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
             mode = data[col].mode()
             data[col] = data[col].fillna(mode[0] if not mode.empty else np.nan)
 
-    # data = data[data['height']>100]
     X = data[[feat1, feat2]].values
 
     # Define K-Means functions (initialize, assign, update)
@@ -77,35 +76,32 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
         frames.append(go.Frame(data=[scatter, cent_scatter], name=f'iter{iter_num}'))
 
     layout = go.Layout(
-        title=dict(text=f'K-Means Clustering Animation {feat1} vs {feat2}, k={k}, Iteration 1'),
+        title=dict(text=f'K-Means Clustering Animation, {feat1} vs {feat2}, k={k}, Iteration 1'),
         xaxis=dict(title=feat1),
         yaxis=dict(title=feat2),
-        autosize=True,
         updatemenus=[dict(
             type='buttons', showactive=False,
             buttons=[dict(label='Play', method='animate', args=[None, {'frame': {'duration': 1000, 'redraw': True}, 'fromcurrent': True}])]
         )]
     )
-    fig = go.Figure(data=frames[0].data, layout=layout, frames=frames)
-    fig.update_xaxes(scaleanchor="y", scaleratio=1)
-
-    y_vals = X[:, 1]
-    ymin, ymax = y_vals.min(), y_vals.max()
-    ypad = 0.05 * (ymax - ymin)   # 5% padding
-    
-    x_vals = X[:, 0]
-    xmin, xmax = x_vals.min(), x_vals.max()
-    xpad = 0.05 * (xmax - xmin)
-    
-    fig.update_xaxes(range=[xmin - xpad, xmax + xpad])
-    fig.update_yaxes(range=[ymin - ypad, ymax + ypad])
+    fig = go.Figure(data=frames[0].data, layout=layout, frames=frames)    
+    # fig.update_layout(margin=dict(l=40, r=40, t=40, b=40))
+    # fig.update_xaxes(scaleanchor="y", scaleratio=1)
 
     # Update title per frame
     for f in fig.frames:
-        f.layout = {'title': f'K-Means Clustering Animation {feat1} vs {feat2}, k={k}, Iteration {f.name.replace("iter","")}' }
+        f.layout = {'title': f'K-Means Clustering Animation, {feat1} vs {feat2}, k={k}, Iteration {f.name.replace("iter","")}' }
 
     # Show interactive animation
     # fig.show()
+
+    fig.write_html(
+        html_output,
+        include_plotlyjs=True,   
+        full_html=True,
+        auto_play=False
+    )
+    print(f"Saved animated K-mean as offline HTML to {html_output}")
 
     # Save last frame as PNG
     last_frame_fig = go.Figure(data=fig.frames[-1].data, layout=go.Layout(
@@ -117,22 +113,14 @@ def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output
     last_frame_fig.write_image(png_output, format='png', width=1200, height=800)
     print(f"Saved last iteration as PNG to {png_output}")
 
-    fig.write_html(
-        html_output,
-        include_plotlyjs=True,   
-        full_html=True,
-        auto_play=False
-    )
-    print(f"Saved animated K-mean as offline HTML to {html_output}")
-
 
 if __name__ == '__main__': 
     
     # Load the open-source dataset
     url = 'https://vincentarelbundock.github.io/Rdatasets/csv/carData/Davis.csv'
-    feat1 = 'height' #'repwt'
-    feat2 = 'weight' #'repht'
-    k = 3
+    feat1 = 'weight' #'repwt'
+    feat2 = 'height' #'repht'
+    k = 5
     n_iters = 10
 
     kmean_clustering(url, feat1, feat2, k, n_iters, csv_output, html_output, png_output)
