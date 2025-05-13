@@ -41,7 +41,7 @@ Download the code from GitHub or clone the repository to your machine
 
 pip install -r requirements.txt
 
-python main.py --flow plot_map input.json
+python main.py --flow plot_Kmean input.json
 
 --------------------------------------------------------------------------------------------------------------------------------------
 
