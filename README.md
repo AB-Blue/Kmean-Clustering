@@ -4,7 +4,7 @@
 ### This application is available on the OneCode platform
 
 Please follow the instructions of provided link to create your Onecode account.
-https://github.com/deeplime-io/onecode
+https://www.onecode.rocks/
 
 Share your email address to access the Map Application.
 Send an email with title "Mapping Application" to a.babasafari@yahoo.com
@@ -12,15 +12,15 @@ Send an email with title "Mapping Application" to a.babasafari@yahoo.com
 The Map Application interface can be accessed via the link below.
 https://www.onecode.rocks/apps
 
-Select either 2D or 3D display mode.
+Upload CSV file in the storage section.
 
-Upload your txt, dat, or xyz file in the storage section.
+Select the CSV file.
 
-In the "Path to map file" field, choose your file.
+Specify desired features in "Feature 1 (X axis)" and "Feature 2 (Y axis)" based on CSV file columns.
 
-Open the file to set the number of lines to skip and specify X, Y, and Z coordinates.
+Define Number of Clusters (k). 
 
-Define the number of grid points for interpolation.
+Define Number of Iterations. 
 
 Name your output folder.
 
@@ -28,7 +28,7 @@ Click "Start Job."
 
 Once the run status shows “success,” scroll down and click the output name.
 
-In 2D mode, select the PNG file; in 3D mode, select the HTML file to view and download your map.
+Outputs are PNG file, the HTML file, and CSV file.
 
 Visit LinkedIn and YouTube pages using the provided links for more details.
 TBD
