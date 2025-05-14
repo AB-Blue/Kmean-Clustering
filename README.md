@@ -32,9 +32,9 @@ First the cluster centroids are initialized, then iteratively the clusters are a
 https://github.com/vincentarelbundock/Rdatasets/tree/master/csv
 
 --------------------------------------------------------------------------------------------------------------------------------------
-![image](https://github.com/user-attachments/assets/169bd5f9-cf51-4f12-87b8-c43205ce2f0e)
-
 ## Steps:
+
+![image](https://github.com/user-attachments/assets/169bd5f9-cf51-4f12-87b8-c43205ce2f0e)
 
 Upload CSV file in the storage section.
 
