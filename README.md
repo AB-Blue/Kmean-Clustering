@@ -21,7 +21,17 @@ Send an email with title "Mapping Application" to a.babasafari@yahoo.com
 https://www.onecode.rocks/apps
 
 --------------------------------------------------------------------------------------------------------------------------------------
+## Descriptions:
 
+It is a K-mean clustering tool that outputs csv file with added cluster labels, animated clustering HTML file, and the image of last iteration K-mean plot.
+First the cluster centroids are initialized, then iteratively the clusters are assigned and centroids are updated, which provides you with interactive visualization of each update per each iteration in HTML file. The limitation on current version is the application on two features only at a time with numerical values only (categorical values are not supported).
+
+--------------------------------------------------------------------------------------------------------------------------------------
+## Dataset:
+
+https://github.com/vincentarelbundock/Rdatasets/tree/master/csv
+
+--------------------------------------------------------------------------------------------------------------------------------------
 ![image](https://github.com/user-attachments/assets/169bd5f9-cf51-4f12-87b8-c43205ce2f0e)
 
 ## Steps:
@@ -61,15 +71,3 @@ Author: Amir Abbas Babasafari (AB)
 Date: April 2025
 
 Email: a.babasafari@yahoo.com
-
-
-
-interactively, iteratively, assign, udate
-2 feats, numerical
-csv path
-https://github.com/vincentarelbundock/Rdatasets/tree/master/csv
-skitlearn
-outputs
-register app and compare
-
-
