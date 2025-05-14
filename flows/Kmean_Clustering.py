@@ -3,7 +3,7 @@ import numpy as np
 import plotly.graph_objects as go
 import kaleido
 
-
+# Function for K-mean clustering (an unsupervised machine learning tool)
 def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output, png_output):
     
     # Make the results reproducible
