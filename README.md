@@ -23,8 +23,15 @@ https://www.onecode.rocks/apps
 --------------------------------------------------------------------------------------------------------------------------------------
 ## Descriptions:
 
-It is a K-mean clustering tool that outputs csv file with added cluster labels, animated clustering HTML file, and the image of last iteration K-mean plot.
-First the cluster centroids are initialized, then iteratively the clusters are assigned and centroids are updated, which provides you with interactive visualization of each update per each iteration in HTML file. The limitation on current version is the application on two features only at a time with numerical values only (categorical values are not supported).
+It’s a K‑means clustering tool that produces three outputs:
+
+1. The original CSV file with an added “cluster” column,
+
+2. An animated HTML visualization showing each iteration of the clustering process, and
+
+3. An image of the last iteration K‑means plot.
+
+Under the hood, it first initializes the cluster centroids, then repeatedly assigns data points to the nearest centroids and recalculates their positions. The HTML animation lets you step through each update interactively. Currently, the tool supports clustering on only two numerical features at a time; categorical variables aren’t yet handled.
 
 --------------------------------------------------------------------------------------------------------------------------------------
 ## Dataset:
