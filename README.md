@@ -65,9 +65,9 @@ Outputs are PNG file (last iteration K-mean plot), the HTML file (animated K-mea
 
 Visit LinkedIn and YouTube pages using the provided links for more details.
 
-https:
+https: https://www.linkedin.com/feed/update/urn:li:activity:7328690442441523200/ 
 
-https:
+https: https://www.youtube.com/watch?v=9P-yfCto2GM
 
 Thank you
 
@@ -75,6 +75,6 @@ Thank you
 
 Author: Amir Abbas Babasafari (AB)
 
-Date: April 2025
+Date: May 2025
 
 Email: a.babasafari@yahoo.com
