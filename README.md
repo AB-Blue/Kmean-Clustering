@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------------------------------------------------------------
 
-# Kmean-Clustering Application
+# Kmeans-Clustering Application
 ## Unsupervised Machine Learning Tool
 ### This application is available on the OneCode platform
 
