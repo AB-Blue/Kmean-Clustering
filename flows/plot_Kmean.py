@@ -7,8 +7,8 @@ def run():
     # CSV upload
     csv = csv_reader(
            key="csv_file",
-           None,
-           label="Upload CSV File")
+           label="Upload CSV File"
+    )
 
     if not csv or not os.path.exists(csv):
         Logger.info("Please upload a valid CSV to continue.")
