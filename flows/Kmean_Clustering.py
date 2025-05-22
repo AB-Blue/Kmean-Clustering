@@ -4,13 +4,13 @@ import plotly.graph_objects as go
 import kaleido
 
 # Function for K-mean clustering (an unsupervised machine learning tool)
-def kmean_clustering(data, feat1, feat2, k, n_iters, csv_output, html_output, png_output):
+def kmean_clustering(csv_path, feat1, feat2, k, n_iters, csv_output, html_output, png_output):
     
     # Make the results reproducible
     np.random.seed(42)
 
     # Read the CSV
-    # data = pd.read_csv(csv_path, index_col=0)
+    data = pd.read_csv(csv_path, index_col=0)
 
     # Fill missing values
     for col in data.columns:
