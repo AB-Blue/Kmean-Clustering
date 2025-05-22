@@ -10,7 +10,6 @@ def run():
            value=None,
            label="Upload CSV File"
     )
-    Logger.info(f"{csv}")
     
     #if not csv or not os.path.exists(csv):
     #    Logger.info("Please upload a valid CSV to continue.")
@@ -75,7 +74,7 @@ def run():
     Logger.info(f"N Iterations  = {n_itr}")
     Logger.info(f"Data Frame CSV description:")
     print(csv.describe())
-
+    Logger.info(f"{csv}")
 
     try:
         # Call K-means function
