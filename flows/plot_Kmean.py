@@ -12,9 +12,9 @@ def run():
     )
     Logger.info(f"{csv}")
     
-    if not csv or not os.path.exists(csv):
-        Logger.info("Please upload a valid CSV to continue.")
-        return
+    #if not csv or not os.path.exists(csv):
+    #    Logger.info("Please upload a valid CSV to continue.")
+    #    return
 
     # Feature selection
     feat1 = dropdown(
