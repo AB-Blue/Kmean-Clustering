@@ -10,7 +10,8 @@ def run():
            value=None,
            label="Upload CSV File"
     )
-
+    Logger.info(f"{csv}")
+    
     if not csv or not os.path.exists(csv):
         Logger.info("Please upload a valid CSV to continue.")
         return
