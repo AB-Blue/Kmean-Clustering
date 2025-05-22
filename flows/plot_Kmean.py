@@ -7,6 +7,7 @@ def run():
     # CSV upload
     csv = csv_reader(
            key="csv_file",
+           value=None,
            label="Upload CSV File"
     )
 
@@ -17,13 +18,13 @@ def run():
     # Feature selection
     feat1 = dropdown(
         'Feature 1 (X axis)',
-        None,
+        value=None,
         options="$csv_file$.columns" 
     )
 
     feat2 = dropdown(
         'Feature 2 (Y axis)',
-        None,
+        value=None,
         options="$csv_file$.columns" 
     )
 
