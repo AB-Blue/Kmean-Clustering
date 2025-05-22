@@ -1,42 +1,49 @@
 import os
 from .Kmean_Clustering import kmean_clustering
-from onecode import file_input, dropdown, text_input, file_output, Logger
+from onecode import csv_reader, file_input, dropdown, text_input, number_input, file_output, slider, Logger
 
 def run():
+
     # CSV upload
-    csv_path = file_input(
-        key="csv_file",
-        label="Upload CSV File",
-        value=""
+    csv = csv_reader(
+           key="csv_file",
+           None,
+           label="Upload CSV File"
     )
-    if not csv_path or not os.path.exists(csv_path):
+
+    if not csv or not os.path.exists(csv):
         Logger.info("Please upload a valid CSV to continue.")
         return
 
     # Feature selection
-    feat1 = text_input(
-        key="feat1",
-        label="Feature 1 (X axis)",
-        value=""
+    feat1 = dropdown(
+        'Feature 1 (X axis)',
+        None,
+        options="$csv_file$.columns" 
     )
-    feat2 = text_input(
-        key="feat2",
-        label="Feature 2 (Y axis)",
-        value=""
+
+    feat2 = dropdown(
+        'Feature 2 (Y axis)',
+        None,
+        options="$csv_file$.columns" 
     )
 
     # Other parameters
-    k_str = text_input(
-        key="n_clusters",
-        label="Number of Clusters (k)",
-        value="3"
-    )
-    it_str = text_input(
-        key="n_iters",
-        label="Number of Iterations",
-        value="10"
+    n_cluters = slider(
+        'Number of Clusters (k)',
+        3,
+        min=2,
+        max=30,
+        step=1
     )
 
+    n_itr = number_input(
+        'Number of Iterations',
+        10,
+        min=1,
+        step=1
+    )
+    
     # Outputs
     out_csv = file_output(
         key="out_csv",
@@ -56,16 +63,23 @@ def run():
 
     # Run clustering when all inputs are set
     try:
-        k = int(k_str)
-        n_iters = int(it_str)
+        k = int(n_cluters)
+        n_iters = int(n_itr)
     except ValueError:
         Logger.error("k and iterations must be integers")
         return
 
+    Logger.info(f"X axis = {feat1} | Y axis = {feat2}")
+    Logger.info(f"N clusters  = {n_cluters}")
+    Logger.info(f"N Iterations  = {n_itr}")
+    Logger.info(f"Data Frame CSV description:")
+    print(csv.describe())
+
+
     try:
         # Call K-means function
         kmean_clustering(
-            csv_path, str(feat1), str(feat2),
+            csv, str(feat1), str(feat2),
             k, n_iters,
             out_csv, out_html, out_png
         )
