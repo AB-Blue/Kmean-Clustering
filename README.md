@@ -41,7 +41,8 @@ https://github.com/vincentarelbundock/Rdatasets/tree/master/csv
 --------------------------------------------------------------------------------------------------------------------------------------
 ## Steps:
 
-![image](https://github.com/user-attachments/assets/169bd5f9-cf51-4f12-87b8-c43205ce2f0e)
+![image](https://github.com/user-attachments/assets/8ce6eb44-012f-4448-8e3a-38d9ac4103bb)
+
 
 Upload CSV file in the storage section.
 
